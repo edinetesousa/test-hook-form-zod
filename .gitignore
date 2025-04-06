@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+dispararWorkflow.sh
+Cypress.env.json
+src

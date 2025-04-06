@@ -25,4 +25,4 @@ dist-ssr
 
 dispararWorkflow.sh
 Cypress.env.json
-src
+.src

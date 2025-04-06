@@ -47,12 +47,7 @@ npm cypress install
 ```bash
 npm install @faker-js/faker --save-dev
 ```
-
-```bash
-npm install --save-dev @shelex/cypress-allure-plugin allure-commandline
-```
-
-6. Execute os testes:
+7. Execute os testes:
 ```bash
 npm run test
 ```

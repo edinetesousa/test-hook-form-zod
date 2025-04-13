@@ -1,0 +1,45 @@
+name: Tests e2e
+
+on:
+  repository_dispatch:
+   types: [trigger_workflow]
+  workflow_dispatch:
+ 
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm install -g allure-commandline
+      
+      - name: Permission node_modules
+        run: chmod +x node_modules/.bin/cypress
+      
+      - name: Set up environment
+        run: echo "LANG=pt_BR.UTF-8" >> $GITHUB_ENV
+
+      - name: Clean Allure results
+        run: npm run allure:clear
+
+      - name: Run Cypress tests
+        run: npm test
+        
+      - name: Generate Allure report
+        run: npm run allure:report
+      
+      - name: Upload Allure report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-test-report
+          path: allure-report/
+
